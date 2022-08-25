@@ -1,0 +1,976 @@
+State 3 conflicts: 9 shift/reduce, 11 reduce/reduce
+State 16 conflicts: 9 shift/reduce, 11 reduce/reduce
+State 30 conflicts: 3 shift/reduce
+State 32 conflicts: 1 shift/reduce
+
+
+Grammar
+
+    0 $accept: program $end
+
+    1 program: PROGRAM block
+
+    2 block: '{' listStmt '}'
+
+    3 listStmt: stmt listStmt
+    4         | %empty
+
+    5 stmt: ';'
+    6     | listVarDef
+    7     | listLib
+    8     | IF '(' cond ')' block
+    9     | WHILE '(' cond ')' block
+   10     | ID '=' expr ';'
+   11     | block
+
+   12 listVarDef: VAR listVar ';' listVarDef
+   13           | %empty
+
+   14 listVar: ID ',' listVar
+   15        | ID
+
+   16 listLib: lib ';' listLib
+   17        | %empty
+
+   18 lib: ADVANCE '(' expr ')'
+   19    | TURN '(' expr ')'
+   20    | COLOR '(' expr ',' expr ',' expr ',' ')'
+
+   21 cond: eq AND eq
+   22     | eq OR eq
+   23     | eq
+
+   24 eq: expr EQUAL expr
+   25   | expr NOTEQUAL expr
+   26   | BOOLEAN
+
+   27 expr: expr '+' term
+   28     | expr '-' term
+   29     | term
+
+   30 term: term '*' factor
+   31     | term '/' factor
+   32     | factor
+
+   33 factor: '(' expr ')'
+   34       | NUM
+   35       | ID
+
+
+Terminals, with rules where they appear
+
+    $end (0) 0
+    '(' (40) 8 9 18 19 20 33
+    ')' (41) 8 9 18 19 20 33
+    '*' (42) 30
+    '+' (43) 27
+    ',' (44) 14 20
+    '-' (45) 28
+    '/' (47) 31
+    ';' (59) 5 10 12 16
+    '=' (61) 10
+    '{' (123) 2
+    '}' (125) 2
+    error (256)
+    VAR (258) 12
+    ID (259) 10 14 15 35
+    IF (260) 8
+    NUM (261) 34
+    BOOLEAN (262) 26
+    WHILE (263) 9
+    AND (264) 21
+    OR (265) 22
+    EQUAL (266) 24
+    NOTEQUAL (267) 25
+    PROGRAM (268) 1
+    ADVANCE (269) 18
+    TURN (270) 19
+    COLOR (271) 20
+
+
+Nonterminals, with rules where they appear
+
+    $accept (28)
+        on left: 0
+    program (29)
+        on left: 1
+        on right: 0
+    block (30)
+        on left: 2
+        on right: 1 8 9 11
+    listStmt (31)
+        on left: 3 4
+        on right: 2 3
+    stmt (32)
+        on left: 5 6 7 8 9 10 11
+        on right: 3
+    listVarDef (33)
+        on left: 12 13
+        on right: 6 12
+    listVar (34)
+        on left: 14 15
+        on right: 12 14
+    listLib (35)
+        on left: 16 17
+        on right: 7 16
+    lib (36)
+        on left: 18 19 20
+        on right: 16
+    cond (37)
+        on left: 21 22 23
+        on right: 8 9
+    eq (38)
+        on left: 24 25 26
+        on right: 21 22 23
+    expr (39)
+        on left: 27 28 29
+        on right: 10 18 19 20 24 25 27 28 33
+    term (40)
+        on left: 30 31 32
+        on right: 27 28 29 30 31
+    factor (41)
+        on left: 33 34 35
+        on right: 30 31 32
+
+
+State 0
+
+    0 $accept: . program $end
+
+    PROGRAM  shift, and go to state 1
+
+    program  go to state 2
+
+
+State 1
+
+    1 program: PROGRAM . block
+
+    '{'  shift, and go to state 3
+
+    block  go to state 4
+
+
+State 2
+
+    0 $accept: program . $end
+
+    $end  shift, and go to state 5
+
+
+State 3
+
+    2 block: '{' . listStmt '}'
+
+    VAR      shift, and go to state 6
+    ID       shift, and go to state 7
+    IF       shift, and go to state 8
+    WHILE    shift, and go to state 9
+    ADVANCE  shift, and go to state 10
+    TURN     shift, and go to state 11
+    COLOR    shift, and go to state 12
+    '{'      shift, and go to state 3
+    ';'      shift, and go to state 13
+
+    VAR       [reduce using rule 13 (listVarDef)]
+    VAR       [reduce using rule 17 (listLib)]
+    ID        [reduce using rule 13 (listVarDef)]
+    ID        [reduce using rule 17 (listLib)]
+    IF        [reduce using rule 13 (listVarDef)]
+    IF        [reduce using rule 17 (listLib)]
+    WHILE     [reduce using rule 13 (listVarDef)]
+    WHILE     [reduce using rule 17 (listLib)]
+    ADVANCE   [reduce using rule 13 (listVarDef)]
+    ADVANCE   [reduce using rule 17 (listLib)]
+    TURN      [reduce using rule 13 (listVarDef)]
+    TURN      [reduce using rule 17 (listLib)]
+    COLOR     [reduce using rule 13 (listVarDef)]
+    COLOR     [reduce using rule 17 (listLib)]
+    '{'       [reduce using rule 13 (listVarDef)]
+    '{'       [reduce using rule 17 (listLib)]
+    '}'       reduce using rule 4 (listStmt)
+    '}'       [reduce using rule 13 (listVarDef)]
+    '}'       [reduce using rule 17 (listLib)]
+    ';'       [reduce using rule 13 (listVarDef)]
+    ';'       [reduce using rule 17 (listLib)]
+    $default  reduce using rule 4 (listStmt)
+
+    block       go to state 14
+    listStmt    go to state 15
+    stmt        go to state 16
+    listVarDef  go to state 17
+    listLib     go to state 18
+    lib         go to state 19
+
+
+State 4
+
+    1 program: PROGRAM block .
+
+    $default  reduce using rule 1 (program)
+
+
+State 5
+
+    0 $accept: program $end .
+
+    $default  accept
+
+
+State 6
+
+   12 listVarDef: VAR . listVar ';' listVarDef
+
+    ID  shift, and go to state 20
+
+    listVar  go to state 21
+
+
+State 7
+
+   10 stmt: ID . '=' expr ';'
+
+    '='  shift, and go to state 22
+
+
+State 8
+
+    8 stmt: IF . '(' cond ')' block
+
+    '('  shift, and go to state 23
+
+
+State 9
+
+    9 stmt: WHILE . '(' cond ')' block
+
+    '('  shift, and go to state 24
+
+
+State 10
+
+   18 lib: ADVANCE . '(' expr ')'
+
+    '('  shift, and go to state 25
+
+
+State 11
+
+   19 lib: TURN . '(' expr ')'
+
+    '('  shift, and go to state 26
+
+
+State 12
+
+   20 lib: COLOR . '(' expr ',' expr ',' expr ',' ')'
+
+    '('  shift, and go to state 27
+
+
+State 13
+
+    5 stmt: ';' .
+
+    $default  reduce using rule 5 (stmt)
+
+
+State 14
+
+   11 stmt: block .
+
+    $default  reduce using rule 11 (stmt)
+
+
+State 15
+
+    2 block: '{' listStmt . '}'
+
+    '}'  shift, and go to state 28
+
+
+State 16
+
+    3 listStmt: stmt . listStmt
+
+    VAR      shift, and go to state 6
+    ID       shift, and go to state 7
+    IF       shift, and go to state 8
+    WHILE    shift, and go to state 9
+    ADVANCE  shift, and go to state 10
+    TURN     shift, and go to state 11
+    COLOR    shift, and go to state 12
+    '{'      shift, and go to state 3
+    ';'      shift, and go to state 13
+
+    VAR       [reduce using rule 13 (listVarDef)]
+    VAR       [reduce using rule 17 (listLib)]
+    ID        [reduce using rule 13 (listVarDef)]
+    ID        [reduce using rule 17 (listLib)]
+    IF        [reduce using rule 13 (listVarDef)]
+    IF        [reduce using rule 17 (listLib)]
+    WHILE     [reduce using rule 13 (listVarDef)]
+    WHILE     [reduce using rule 17 (listLib)]
+    ADVANCE   [reduce using rule 13 (listVarDef)]
+    ADVANCE   [reduce using rule 17 (listLib)]
+    TURN      [reduce using rule 13 (listVarDef)]
+    TURN      [reduce using rule 17 (listLib)]
+    COLOR     [reduce using rule 13 (listVarDef)]
+    COLOR     [reduce using rule 17 (listLib)]
+    '{'       [reduce using rule 13 (listVarDef)]
+    '{'       [reduce using rule 17 (listLib)]
+    '}'       reduce using rule 4 (listStmt)
+    '}'       [reduce using rule 13 (listVarDef)]
+    '}'       [reduce using rule 17 (listLib)]
+    ';'       [reduce using rule 13 (listVarDef)]
+    ';'       [reduce using rule 17 (listLib)]
+    $default  reduce using rule 4 (listStmt)
+
+    block       go to state 14
+    listStmt    go to state 29
+    stmt        go to state 16
+    listVarDef  go to state 17
+    listLib     go to state 18
+    lib         go to state 19
+
+
+State 17
+
+    6 stmt: listVarDef .
+
+    $default  reduce using rule 6 (stmt)
+
+
+State 18
+
+    7 stmt: listLib .
+
+    $default  reduce using rule 7 (stmt)
+
+
+State 19
+
+   16 listLib: lib . ';' listLib
+
+    ';'  shift, and go to state 30
+
+
+State 20
+
+   14 listVar: ID . ',' listVar
+   15        | ID .
+
+    ','  shift, and go to state 31
+
+    $default  reduce using rule 15 (listVar)
+
+
+State 21
+
+   12 listVarDef: VAR listVar . ';' listVarDef
+
+    ';'  shift, and go to state 32
+
+
+State 22
+
+   10 stmt: ID '=' . expr ';'
+
+    ID   shift, and go to state 33
+    NUM  shift, and go to state 34
+    '('  shift, and go to state 35
+
+    expr    go to state 36
+    term    go to state 37
+    factor  go to state 38
+
+
+State 23
+
+    8 stmt: IF '(' . cond ')' block
+
+    ID       shift, and go to state 33
+    NUM      shift, and go to state 34
+    BOOLEAN  shift, and go to state 39
+    '('      shift, and go to state 35
+
+    cond    go to state 40
+    eq      go to state 41
+    expr    go to state 42
+    term    go to state 37
+    factor  go to state 38
+
+
+State 24
+
+    9 stmt: WHILE '(' . cond ')' block
+
+    ID       shift, and go to state 33
+    NUM      shift, and go to state 34
+    BOOLEAN  shift, and go to state 39
+    '('      shift, and go to state 35
+
+    cond    go to state 43
+    eq      go to state 41
+    expr    go to state 42
+    term    go to state 37
+    factor  go to state 38
+
+
+State 25
+
+   18 lib: ADVANCE '(' . expr ')'
+
+    ID   shift, and go to state 33
+    NUM  shift, and go to state 34
+    '('  shift, and go to state 35
+
+    expr    go to state 44
+    term    go to state 37
+    factor  go to state 38
+
+
+State 26
+
+   19 lib: TURN '(' . expr ')'
+
+    ID   shift, and go to state 33
+    NUM  shift, and go to state 34
+    '('  shift, and go to state 35
+
+    expr    go to state 45
+    term    go to state 37
+    factor  go to state 38
+
+
+State 27
+
+   20 lib: COLOR '(' . expr ',' expr ',' expr ',' ')'
+
+    ID   shift, and go to state 33
+    NUM  shift, and go to state 34
+    '('  shift, and go to state 35
+
+    expr    go to state 46
+    term    go to state 37
+    factor  go to state 38
+
+
+State 28
+
+    2 block: '{' listStmt '}' .
+
+    $default  reduce using rule 2 (block)
+
+
+State 29
+
+    3 listStmt: stmt listStmt .
+
+    $default  reduce using rule 3 (listStmt)
+
+
+State 30
+
+   16 listLib: lib ';' . listLib
+
+    ADVANCE  shift, and go to state 10
+    TURN     shift, and go to state 11
+    COLOR    shift, and go to state 12
+
+    ADVANCE   [reduce using rule 17 (listLib)]
+    TURN      [reduce using rule 17 (listLib)]
+    COLOR     [reduce using rule 17 (listLib)]
+    $default  reduce using rule 17 (listLib)
+
+    listLib  go to state 47
+    lib      go to state 19
+
+
+State 31
+
+   14 listVar: ID ',' . listVar
+
+    ID  shift, and go to state 20
+
+    listVar  go to state 48
+
+
+State 32
+
+   12 listVarDef: VAR listVar ';' . listVarDef
+
+    VAR  shift, and go to state 6
+
+    VAR       [reduce using rule 13 (listVarDef)]
+    $default  reduce using rule 13 (listVarDef)
+
+    listVarDef  go to state 49
+
+
+State 33
+
+   35 factor: ID .
+
+    $default  reduce using rule 35 (factor)
+
+
+State 34
+
+   34 factor: NUM .
+
+    $default  reduce using rule 34 (factor)
+
+
+State 35
+
+   33 factor: '(' . expr ')'
+
+    ID   shift, and go to state 33
+    NUM  shift, and go to state 34
+    '('  shift, and go to state 35
+
+    expr    go to state 50
+    term    go to state 37
+    factor  go to state 38
+
+
+State 36
+
+   10 stmt: ID '=' expr . ';'
+   27 expr: expr . '+' term
+   28     | expr . '-' term
+
+    '+'  shift, and go to state 51
+    '-'  shift, and go to state 52
+    ';'  shift, and go to state 53
+
+
+State 37
+
+   29 expr: term .
+   30 term: term . '*' factor
+   31     | term . '/' factor
+
+    '*'  shift, and go to state 54
+    '/'  shift, and go to state 55
+
+    $default  reduce using rule 29 (expr)
+
+
+State 38
+
+   32 term: factor .
+
+    $default  reduce using rule 32 (term)
+
+
+State 39
+
+   26 eq: BOOLEAN .
+
+    $default  reduce using rule 26 (eq)
+
+
+State 40
+
+    8 stmt: IF '(' cond . ')' block
+
+    ')'  shift, and go to state 56
+
+
+State 41
+
+   21 cond: eq . AND eq
+   22     | eq . OR eq
+   23     | eq .
+
+    AND  shift, and go to state 57
+    OR   shift, and go to state 58
+
+    $default  reduce using rule 23 (cond)
+
+
+State 42
+
+   24 eq: expr . EQUAL expr
+   25   | expr . NOTEQUAL expr
+   27 expr: expr . '+' term
+   28     | expr . '-' term
+
+    EQUAL     shift, and go to state 59
+    NOTEQUAL  shift, and go to state 60
+    '+'       shift, and go to state 51
+    '-'       shift, and go to state 52
+
+
+State 43
+
+    9 stmt: WHILE '(' cond . ')' block
+
+    ')'  shift, and go to state 61
+
+
+State 44
+
+   18 lib: ADVANCE '(' expr . ')'
+   27 expr: expr . '+' term
+   28     | expr . '-' term
+
+    '+'  shift, and go to state 51
+    '-'  shift, and go to state 52
+    ')'  shift, and go to state 62
+
+
+State 45
+
+   19 lib: TURN '(' expr . ')'
+   27 expr: expr . '+' term
+   28     | expr . '-' term
+
+    '+'  shift, and go to state 51
+    '-'  shift, and go to state 52
+    ')'  shift, and go to state 63
+
+
+State 46
+
+   20 lib: COLOR '(' expr . ',' expr ',' expr ',' ')'
+   27 expr: expr . '+' term
+   28     | expr . '-' term
+
+    '+'  shift, and go to state 51
+    '-'  shift, and go to state 52
+    ','  shift, and go to state 64
+
+
+State 47
+
+   16 listLib: lib ';' listLib .
+
+    $default  reduce using rule 16 (listLib)
+
+
+State 48
+
+   14 listVar: ID ',' listVar .
+
+    $default  reduce using rule 14 (listVar)
+
+
+State 49
+
+   12 listVarDef: VAR listVar ';' listVarDef .
+
+    $default  reduce using rule 12 (listVarDef)
+
+
+State 50
+
+   27 expr: expr . '+' term
+   28     | expr . '-' term
+   33 factor: '(' expr . ')'
+
+    '+'  shift, and go to state 51
+    '-'  shift, and go to state 52
+    ')'  shift, and go to state 65
+
+
+State 51
+
+   27 expr: expr '+' . term
+
+    ID   shift, and go to state 33
+    NUM  shift, and go to state 34
+    '('  shift, and go to state 35
+
+    term    go to state 66
+    factor  go to state 38
+
+
+State 52
+
+   28 expr: expr '-' . term
+
+    ID   shift, and go to state 33
+    NUM  shift, and go to state 34
+    '('  shift, and go to state 35
+
+    term    go to state 67
+    factor  go to state 38
+
+
+State 53
+
+   10 stmt: ID '=' expr ';' .
+
+    $default  reduce using rule 10 (stmt)
+
+
+State 54
+
+   30 term: term '*' . factor
+
+    ID   shift, and go to state 33
+    NUM  shift, and go to state 34
+    '('  shift, and go to state 35
+
+    factor  go to state 68
+
+
+State 55
+
+   31 term: term '/' . factor
+
+    ID   shift, and go to state 33
+    NUM  shift, and go to state 34
+    '('  shift, and go to state 35
+
+    factor  go to state 69
+
+
+State 56
+
+    8 stmt: IF '(' cond ')' . block
+
+    '{'  shift, and go to state 3
+
+    block  go to state 70
+
+
+State 57
+
+   21 cond: eq AND . eq
+
+    ID       shift, and go to state 33
+    NUM      shift, and go to state 34
+    BOOLEAN  shift, and go to state 39
+    '('      shift, and go to state 35
+
+    eq      go to state 71
+    expr    go to state 42
+    term    go to state 37
+    factor  go to state 38
+
+
+State 58
+
+   22 cond: eq OR . eq
+
+    ID       shift, and go to state 33
+    NUM      shift, and go to state 34
+    BOOLEAN  shift, and go to state 39
+    '('      shift, and go to state 35
+
+    eq      go to state 72
+    expr    go to state 42
+    term    go to state 37
+    factor  go to state 38
+
+
+State 59
+
+   24 eq: expr EQUAL . expr
+
+    ID   shift, and go to state 33
+    NUM  shift, and go to state 34
+    '('  shift, and go to state 35
+
+    expr    go to state 73
+    term    go to state 37
+    factor  go to state 38
+
+
+State 60
+
+   25 eq: expr NOTEQUAL . expr
+
+    ID   shift, and go to state 33
+    NUM  shift, and go to state 34
+    '('  shift, and go to state 35
+
+    expr    go to state 74
+    term    go to state 37
+    factor  go to state 38
+
+
+State 61
+
+    9 stmt: WHILE '(' cond ')' . block
+
+    '{'  shift, and go to state 3
+
+    block  go to state 75
+
+
+State 62
+
+   18 lib: ADVANCE '(' expr ')' .
+
+    $default  reduce using rule 18 (lib)
+
+
+State 63
+
+   19 lib: TURN '(' expr ')' .
+
+    $default  reduce using rule 19 (lib)
+
+
+State 64
+
+   20 lib: COLOR '(' expr ',' . expr ',' expr ',' ')'
+
+    ID   shift, and go to state 33
+    NUM  shift, and go to state 34
+    '('  shift, and go to state 35
+
+    expr    go to state 76
+    term    go to state 37
+    factor  go to state 38
+
+
+State 65
+
+   33 factor: '(' expr ')' .
+
+    $default  reduce using rule 33 (factor)
+
+
+State 66
+
+   27 expr: expr '+' term .
+   30 term: term . '*' factor
+   31     | term . '/' factor
+
+    '*'  shift, and go to state 54
+    '/'  shift, and go to state 55
+
+    $default  reduce using rule 27 (expr)
+
+
+State 67
+
+   28 expr: expr '-' term .
+   30 term: term . '*' factor
+   31     | term . '/' factor
+
+    '*'  shift, and go to state 54
+    '/'  shift, and go to state 55
+
+    $default  reduce using rule 28 (expr)
+
+
+State 68
+
+   30 term: term '*' factor .
+
+    $default  reduce using rule 30 (term)
+
+
+State 69
+
+   31 term: term '/' factor .
+
+    $default  reduce using rule 31 (term)
+
+
+State 70
+
+    8 stmt: IF '(' cond ')' block .
+
+    $default  reduce using rule 8 (stmt)
+
+
+State 71
+
+   21 cond: eq AND eq .
+
+    $default  reduce using rule 21 (cond)
+
+
+State 72
+
+   22 cond: eq OR eq .
+
+    $default  reduce using rule 22 (cond)
+
+
+State 73
+
+   24 eq: expr EQUAL expr .
+   27 expr: expr . '+' term
+   28     | expr . '-' term
+
+    '+'  shift, and go to state 51
+    '-'  shift, and go to state 52
+
+    $default  reduce using rule 24 (eq)
+
+
+State 74
+
+   25 eq: expr NOTEQUAL expr .
+   27 expr: expr . '+' term
+   28     | expr . '-' term
+
+    '+'  shift, and go to state 51
+    '-'  shift, and go to state 52
+
+    $default  reduce using rule 25 (eq)
+
+
+State 75
+
+    9 stmt: WHILE '(' cond ')' block .
+
+    $default  reduce using rule 9 (stmt)
+
+
+State 76
+
+   20 lib: COLOR '(' expr ',' expr . ',' expr ',' ')'
+   27 expr: expr . '+' term
+   28     | expr . '-' term
+
+    '+'  shift, and go to state 51
+    '-'  shift, and go to state 52
+    ','  shift, and go to state 77
+
+
+State 77
+
+   20 lib: COLOR '(' expr ',' expr ',' . expr ',' ')'
+
+    ID   shift, and go to state 33
+    NUM  shift, and go to state 34
+    '('  shift, and go to state 35
+
+    expr    go to state 78
+    term    go to state 37
+    factor  go to state 38
+
+
+State 78
+
+   20 lib: COLOR '(' expr ',' expr ',' expr . ',' ')'
+   27 expr: expr . '+' term
+   28     | expr . '-' term
+
+    '+'  shift, and go to state 51
+    '-'  shift, and go to state 52
+    ','  shift, and go to state 79
+
+
+State 79
+
+   20 lib: COLOR '(' expr ',' expr ',' expr ',' . ')'
+
+    ')'  shift, and go to state 80
+
+
+State 80
+
+   20 lib: COLOR '(' expr ',' expr ',' expr ',' ')' .
+
+    $default  reduce using rule 20 (lib)

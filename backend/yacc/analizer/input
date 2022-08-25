@@ -1,0 +1,25 @@
+program { 
+  
+  while(true)
+  {
+    var y;
+    y = 4;
+  }
+  var x, y, z;
+  var w;
+  x = 4;
+  y = 6;
+  while(true){}
+  while(true){}
+  while(true){}
+  y= 6;
+  y = 6;
+  while(true){
+    while(true){
+      if(x equal 6 or 4+3 notequal 34){}
+      advance(4/3*(x+2 - (3+4)));
+    }
+    y = 6;
+    y = 6;
+  }
+}

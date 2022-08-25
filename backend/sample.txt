@@ -1,0 +1,22 @@
+program {
+  var x, y, z;
+  x = 4;
+  y = 5;
+  z = 10;
+  if(z equal 10)
+  {
+    advance(z);
+  }
+  while(x + 2*3 notequal (y + 10) )
+  {
+    turn(45);
+    advance(x*10 + z*z);
+    x = x + 1;
+  }
+  var w, r;
+  w = 3; r = 4;
+  if(w notequal 3 or r equal 3){
+    turn(135);
+    color(x*3, (y-1)*100, z*3);
+  }
+}

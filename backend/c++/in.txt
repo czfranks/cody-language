@@ -1,0 +1,28 @@
+program { 
+  
+  while(false)
+  {
+    var y, d;
+    y = 43;
+  }
+  var x, gaaa, z;
+  var w;
+  x = 3;
+  color(x,43,34*432);
+  if(x equal y){}
+  x = 322;
+  y = 6;
+  while(false){}
+  while(false){}
+  while(false){ var r;}
+  y= 60;
+  y = 6;
+  while(false){
+    while(false){
+      if(x equal 6 or 4+3 notequal 34){}
+      advance(4/3*(x+2 - (3+4)));
+    }
+    y = 6;
+    y = 6;
+  }
+}

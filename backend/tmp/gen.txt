@@ -1,0 +1,11 @@
+advance 10
+turn 45
+advance 140
+turn 45
+advance 150
+turn 45
+advance 160
+turn 45
+advance 170
+turn 45
+advance 180

@@ -1,0 +1,4 @@
+program {
+  if(true){ x = 322;}
+  advance(x*3);
+}
